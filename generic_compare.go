@@ -13,16 +13,16 @@ func simpleEqual(a, b interface{}) bool {
 }
 
 func sliceEqual(a, b interface{}) bool {
-	slicea, oka := generateInterfaceSlice(a)
-	if !oka {
+	slice_a, ok_a := generateInterfaceSlice(a)
+	if !ok_a {
 		return false
 	}
-	sliceb, okb := generateInterfaceSlice(b)
-	if !okb {
+	slice_b, ok_b := generateInterfaceSlice(b)
+	if !ok_b {
 		return false
 	}
 
-	return sliceEqual_(slicea, sliceb)
+	return sliceEqual_(slice_a, slice_b)
 }
 
 func isSlice(arg interface{}) (val reflect.Value, ok bool) {
@@ -33,8 +33,8 @@ func isSlice(arg interface{}) (val reflect.Value, ok bool) {
 	return val, ok
 }
 
-func generateInterfaceSlice(a interface{}) ([]interface{}, bool) {
-	val, ok := isSlice(a)
+func generateInterfaceSlice(arg interface{}) ([]interface{}, bool) {
+	val, ok := isSlice(arg)
 	if !ok {
 		return nil, false
 	}
