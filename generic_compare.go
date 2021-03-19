@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 func simpleEqual(a, b interface{}) bool {
 	if a == b {
@@ -9,7 +12,41 @@ func simpleEqual(a, b interface{}) bool {
 	return false
 }
 
-func sliceEqual(a, b []interface{}) bool {
+func sliceEqual(a, b interface{}) bool {
+	slicea, oka := generateInterfaceSlice(a)
+	if !oka {
+		return false
+	}
+	sliceb, okb := generateInterfaceSlice(b)
+	if !okb {
+		return false
+	}
+
+	return sliceEqual_(slicea, sliceb)
+}
+
+func isSlice(arg interface{}) (val reflect.Value, ok bool) {
+	val = reflect.ValueOf(arg)
+	if val.Kind() == reflect.Slice {
+		ok = true
+	}
+	return val, ok
+}
+
+func generateInterfaceSlice(a interface{}) ([]interface{}, bool) {
+	val, ok := isSlice(a)
+	if !ok {
+		return nil, false
+	}
+	sliceLen := val.Len()
+	out := make([]interface{}, sliceLen)
+	for i := 0; i < sliceLen; i++ {
+		out[i] = val.Index(i).Interface()
+	}
+	return out, true
+}
+
+func sliceEqual_(a, b []interface{}) bool {
 	if (a == nil) && (b == nil) {
 		return true
 	}
@@ -47,24 +84,24 @@ func testgcomp() {
 	intcv := &ConfigValue{
 		name:     "integer compare",
 		compFunc: simpleEqual,
-		value1:   1,
-		value2:   2,
+		value1:   91,
+		value2:   9,
 	}
 	if true == intcv.compFunc(intcv.value1, intcv.value2) {
 		fmt.Println("The values of <" + intcv.name + "> are the same.")
 	} else {
-		fmt.Println("The values of <" + intcv.name + "> are the same.")
+		fmt.Println("The values of <" + intcv.name + "> are not the same.")
 	}
 
 	strslicecv := &ConfigValue{
 		name:     "string slice compare",
 		compFunc: sliceEqual,
 		value1:   []string{"a", "b", "c"},
-		value2:   []string{"d", "d"},
+		value2:   []string{"d", "d", "c"},
 	}
 	if true == strslicecv.compFunc(strslicecv.value1, strslicecv.value2) {
 		fmt.Println("The values of <" + strslicecv.name + "> are the same.")
 	} else {
-		fmt.Println("The values of <" + strslicecv.name + "> are the same.")
+		fmt.Println("The values of <" + strslicecv.name + "> are not the same.")
 	}
 }

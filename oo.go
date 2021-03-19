@@ -27,10 +27,11 @@ type I interface {
 }
 
 func testoo() {
-	a := new(A)
-	a.m_a = 1
+	a := A{
+		m_a: 1,
+	}
 
-	b := new(B)
+	b := B{}
 	b.m_a = 2
 	b.m_b = "b"
 
