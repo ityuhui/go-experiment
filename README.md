@@ -80,6 +80,19 @@ log.Fatal("")
 ```
 
 ### 类型断言
-```
-x.(T) x是接口类型的表达式，T是一个类型（可以是一个具体类型，也可以是另一个接口）
+
+#### x.(T) 
+
+x是接口类型的表达式，T是一个类型（可以是一个具体类型，也可以是另一个接口）
+
+#### x.(type)
+
+```go
+switch x.(type) {
+    case nil: //
+    case int,uint: //
+    case bool: //
+    case string: //
+    default: //
+}
 ```
