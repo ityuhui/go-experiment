@@ -96,3 +96,32 @@ switch x.(type) {
     default: //
 }
 ```
+
+#### 反射
+
+```go
+reflect.TypeOf(i interface{})
+reflect.ValueOf(i interface{})
+
+func Any(value interface{}) string {
+    return formatAtom(refect.ValueOf(value))
+}
+
+func formatAtom(v reflect.Value) string {
+    switch v.Kind() {
+    case reflect.Int64:
+    case reflect.Bool:
+    case reflect.Invalid:
+    default:
+        return v.Type().String() + " value"
+    }
+}
+
+```
+
+传入任意类型，被隐式转换为空接口 interface{}, 因为接口具有两个成员：具体类型，具体值。
+
+反射最常见的应用场景：
+数据在文件和内存之间的序列号和反序列化。
+
+参考: https://www.cnblogs.com/qcrao-2018/p/10822655.html
