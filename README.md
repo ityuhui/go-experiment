@@ -79,13 +79,13 @@ counts := make(map[string]int)
 log.Fatal("")
 ```
 
-### 类型断言
+## 类型断言
 
-#### x.(T) 
+### x.(T) 
 
 x是接口类型的表达式，T是一个类型（可以是一个具体类型，也可以是另一个接口）
 
-#### x.(type)
+### x.(type)
 
 ```go
 switch x.(type) {
@@ -97,7 +97,7 @@ switch x.(type) {
 }
 ```
 
-#### 反射
+## 反射
 
 ```go
 reflect.TypeOf(i interface{})
@@ -125,3 +125,45 @@ func formatAtom(v reflect.Value) string {
 数据在文件和内存之间的序列号和反序列化。
 
 参考: https://www.cnblogs.com/qcrao-2018/p/10822655.html
+
+## 共享变量实现并发
+
+golang的准则：在并发环境下，不要通过共享内存来通信，而要通过通道。
+
+### 互斥锁
+```go
+
+// 互斥锁
+sync.Mutex
+
+// 通过使用
+defer mu.Unlock()
+// 来确保解锁
+
+// go语言的互斥量是不可重入的。
+
+// 读写互斥锁
+sync.RWMutex
+
+// 延迟初始化
+sync.Once
+
+```
+### 竞态检测器
+
+## 方法
+
+- 可以给任意类型定义方法，并不一定是结构体：
+```go
+type Path []Point
+func (path Path) Distance() float64 {
+    ...
+}
+```
+
+- 方法的指针接收者，可以避免复制实参
+- 可以调用内嵌结构体的方法，其实这是编译器实现的桥接，并不是继承。
+- 定义一个“方法”变量
+```go
+var op func(p,q Point) Point
+```
