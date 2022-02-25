@@ -173,3 +173,16 @@ var op func(p,q Point) Point
 - go语言只有一种封装，就是名字的大小写，首字母大写的可以从包中导出。
 - 要封装一个对象，必须使用结构体
 - 封装的单元是包而不是类型，无论是函数还是方法，结构体类型里的字段对于同一个包里的所有代码都是可见的。
+
+## 调试 debug (delve)
+
+
+```delve
+
+config -list
+
+config max-string-len 1000
+
+config max-array-values 1000
+
+```
