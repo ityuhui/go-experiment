@@ -186,3 +186,14 @@ config max-string-len 1000
 config max-array-values 1000
 
 ```
+
+## 覆盖率测试 test coverage
+
+```bash
+go test -cover
+go test -coverprofile=coverage.out
+go tool cover -html=coverage.out
+go test -covermode=count -coverprofile=count.out fmt
+go tool cover -html=count.out
+
+```
