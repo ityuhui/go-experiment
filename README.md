@@ -204,4 +204,5 @@ go tool cover -html=count.out
 
 ```shell
 go mod why -m $indirect-module-name
+go mod why -m all
 ```
