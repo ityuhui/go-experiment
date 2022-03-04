@@ -197,3 +197,11 @@ go test -covermode=count -coverprofile=count.out fmt
 go tool cover -html=count.out
 
 ```
+
+## module
+
+### 找到引入 indirect 依赖的模块
+
+```shell
+go mod why -m $indirect-module-name
+```
