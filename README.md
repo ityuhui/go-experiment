@@ -206,3 +206,8 @@ go tool cover -html=count.out
 go mod why -m $indirect-module-name
 go mod why -m all
 ```
+
+## cgo 和 goc
+
+- [command cgo](https://golang.org/cmd/cgo/)
+- [C?Go?Cgo!](https://blog.golang.org/c-go-cgo)
