@@ -207,9 +207,9 @@ go tool cover -html=count.out
 - 封装的单元是包而不是类型，无论是函数还是方法，结构体类型里的字段对于同一个包里的所有代码都是可见的。
 
 
-## module
+## Module
 
-### graph
+### Graph
 
 ```bash
 go mod graph 
@@ -219,7 +219,7 @@ go mod graph
 
 main module --> dependency module 这里包括所有的直接和间接依赖。
 
-### get
+### Get
 
 ```bash
 go get ${module_name}
@@ -231,18 +231,31 @@ go get -u ${module_name}
 ```
 更新 module 导入的 package 所在的 module 的版本，以及 module 自己的版本，但是并不做编译检查，要使用 go mod tidy 做清理和编译检查。
 
-### tidy
+### Tidy
 
 ```bash
 go mod tidy
 ```
+会检查 package 是否在 module 里，并不升级依赖的版本
 
-### 找到引入 indirect 依赖的模块
+### Why
 
-```shell
-go mod why -m $indirect-module-name
-go mod why -m all
+```bash
+go mod why -m ${module_name}
 ```
+检查 module 所在的 package 的最短依赖
+
+### List
+
+```bash
+go list -m -u ${module_name}
+```
+查看当前生效的版本以及可以升级的版本
+
+
+### 其他
+
+老的项目，没有使用 module 的话，上面的命令都看不到有用的结果。需要的话，到 vendor 目录去看。
 
 ## cgo 和 goc
 
