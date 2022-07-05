@@ -168,12 +168,6 @@ func (path Path) Distance() float64 {
 var op func(p,q Point) Point
 ```
 
-## 封装
-
-- go语言只有一种封装，就是名字的大小写，首字母大写的可以从包中导出。
-- 要封装一个对象，必须使用结构体
-- 封装的单元是包而不是类型，无论是函数还是方法，结构体类型里的字段对于同一个包里的所有代码都是可见的。
-
 ## 调试 debug (delve)
 
 
@@ -206,7 +200,24 @@ go tool cover -html=count.out
 
 多个 module 可以在同一个 repository 里面
 
+## 封装
+
+- go语言只有一种封装，就是名字的大小写，首字母大写的可以从包中导出。
+- 要封装一个对象，必须使用结构体
+- 封装的单元是包而不是类型，无论是函数还是方法，结构体类型里的字段对于同一个包里的所有代码都是可见的。
+
+
 ## module
+
+### graph
+
+```bash
+go mod graph 
+```
+
+的结果，不区分直接依赖和间接依赖。
+
+main module --> dependency module 这里包括所有的直接和间接依赖。
 
 ### 找到引入 indirect 依赖的模块
 
