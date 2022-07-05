@@ -215,9 +215,27 @@ go tool cover -html=count.out
 go mod graph 
 ```
 
-的结果，不区分直接依赖和间接依赖。
+的结果，不区分直接依赖和间接依赖。即：
 
 main module --> dependency module 这里包括所有的直接和间接依赖。
+
+### get
+
+```bash
+go get ${module_name}
+```
+更新 module 到最新的满足兼容要求的版本
+
+```bash
+go get -u ${module_name}
+```
+更新 module 导入的 package 所在的 module 的版本，以及 module 自己的版本，但是并不做编译检查，要使用 go mod tidy 做清理和编译检查。
+
+### tidy
+
+```bash
+go mod tidy
+```
 
 ### 找到引入 indirect 依赖的模块
 
