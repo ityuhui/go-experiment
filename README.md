@@ -198,6 +198,14 @@ go tool cover -html=count.out
 
 ```
 
+## package
+
+一个 package 就是一个文件夹，里面必须有一个 .go 文件，可以导出给其他地方使用
+
+一个或者多个 package（文件夹） 可以组成一个 module, module 的根目录下必须包含 go.mod 和 go.sum，module 是为了解决 package 的版本以及依赖的。之前的解决方案是 GOPATH 和 vendor
+
+多个 module 可以在同一个 repository 里面
+
 ## module
 
 ### 找到引入 indirect 依赖的模块
