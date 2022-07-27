@@ -261,3 +261,18 @@ go list -m -u ${module_name}
 
 - [command cgo](https://golang.org/cmd/cgo/)
 - [C?Go?Cgo!](https://blog.golang.org/c-go-cgo)
+
+## go build
+
+```bash
+go build -work -a -x -p 1
+```
+
+-work: go build creates a temporary folder for work files. This arg will print out the location of that folder and not delete it after the build
+-a: Golang caches previously built packages. -a makes go build ignore the cache so our build will print all steps
+-p 1: This sets the concurrency to a single thread to log output linear
+-x: go build is a wrapper around other Golang tools like compile. -x outputs the commands and arguments that are sent to these tools
+
+根据 log 可以看出，每一个依赖包都会被 compile 成 .a ，然后重命名到一个临时文件，最后全部 link 成一个可执行文件
+
+
