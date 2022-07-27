@@ -275,5 +275,7 @@ go build -work -a -x -p 1
 
 根据 log 可以看出，每一个依赖包都会被 compile 成 .a ，然后重命名到一个临时文件，最后全部 link 成一个可执行文件
 
-参考：https://maori.geek.nz/how-go-build-works-750bb2ba6d8e
+参考：
+- [How go build works](https://maori.geek.nz/how-go-build-works-750bb2ba6d8e)
+- [编译成静态库](https://developpaper.com/compilation-and-use-of-go-language-static-library/)
 
