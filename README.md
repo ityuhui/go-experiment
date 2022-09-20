@@ -221,6 +221,8 @@ main module --> dependency module 这里包括所有的直接和间接依赖。
 
 ### Get
 
+从 go1.18 起，get 只更新 go.mod 和 go.sum 这两个文件，不会再做 build，也不会去安装 binary（go install 用来安装）
+
 ```bash
 go get ${package_name}
 ```
